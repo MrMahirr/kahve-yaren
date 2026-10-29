@@ -113,6 +113,10 @@ test.describe('Yâren — duman testleri', () => {
 
   test('erişilebilirlik: axe ciddi veya kritik ihlal bulmaz', async ({ page }) => {
     await page.goto('/')
+    // İskeletteki saydam metin kontrast ölçümünü anlamsız kılar: tüm bölümler açılsın.
+    for (const id of ['demleme', 'kahveler', 'iletisim']) await scrollTo(page, `#${id}`)
+    await expect(page.locator('[data-loading]')).toHaveCount(0)
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
     // Giriş animasyonları (yarı saydam → görünür) bitmeden ölçülürse kontrast yanlış düşük çıkar.
     await page.evaluate(() =>
       Promise.all(
