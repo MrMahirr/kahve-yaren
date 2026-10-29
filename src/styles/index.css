@@ -1,0 +1,285 @@
+/* =========================================================
+   Yâren — stil girişi (Tailwind CSS v4, CSS-first)
+   Bölümler: 1 Tokenlar · 2 Temel · 3 Ortak yardımcılar · 4 Hareket
+   Kaynak: yaren-site/css/style.css
+   ========================================================= */
+@import 'tailwindcss';
+
+/* 1. Tasarım tokenları ------------------------------------ */
+@theme {
+  /* Renkler — Tailwind'in varsayılan paleti kapalı, yalnızca marka renkleri */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-kaymak: #f4efe6; /* sayfa zemini */
+  --color-kopuk: #fbf8f2; /* kart yüzeyi */
+  --color-kum: #e6dccb; /* kenarlık */
+  --color-kum-koyu: #d9ccb8; /* liste ayracı */
+  --color-kum-cizgi: #e0d4c1; /* zemindeki dev "Menü" yazısının çizgisi */
+  --color-findik: #b08a68; /* dekor */
+  --color-dem: #6b5747; /* ikincil metin */
+  --color-gri-kahve: #8f7a69; /* form çizgisi, placeholder */
+  --color-telve: #2b1d16; /* ana metin, koyu yüzey */
+  --color-gece: #140d0a; /* video zemini */
+  --color-zeytin: #5b6835; /* birincil eylem */
+  --color-zeytin-koyu: #434d24; /* hover */
+  --color-zeytin-acik: #e3e6d3; /* başarı / konu çipi */
+  --color-zeytin-isik: #c9d39e; /* koyu zeminde vurgu */
+  --color-filiz: #a9b57e; /* koyu zeminde etiket */
+  --color-krema: #e2c9a6; /* koyu zeminde gövde metni */
+  --color-kiremit: #a03d27; /* hata */
+  --color-kiremit-acik: #f6e3dc;
+
+  /* Tipografi */
+  --font-*: initial;
+  --font-display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, Menlo, monospace;
+
+  /* Kırılımlar — tasarımdaki max-width sınırlarının min-width karşılıkları */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 561px; /* ≤560 mobil */
+  --breakpoint-md: 721px; /* ≤720 burger menü */
+  --breakpoint-lg: 761px; /* ≤760 dar kare dizisi / hikâye */
+  --breakpoint-xl: 1024px;
+  --breakpoint-2xl: 1280px;
+
+  /* Düzen */
+  --container-site: 1280px;
+  --spacing-nav: 64px;
+  --spacing-gutter: clamp(20px, 5vw, 40px);
+
+  /* Hareket */
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-word-up: word-up 1s var(--ease-brand) both;
+  --animate-fade-up: fade-up 0.9s ease both;
+  --animate-rise: rise linear both;
+  --animate-pop: pop 0.4s ease both;
+  --animate-draw: draw 0.6s ease 0.25s both;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-drop: drop 1.8s ease-in-out infinite;
+  --animate-menu-in: menu-in 0.35s ease both;
+
+  @keyframes word-up {
+    from {
+      transform: translateY(110%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(56px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 30;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes drop {
+    0% {
+      transform: translateY(-100%);
+    }
+    60% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* 2. Temel ------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--spacing-nav);
+  }
+  body {
+    background: var(--color-kaymak);
+    color: var(--color-telve);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-filiz);
+    outline-offset: 3px;
+  }
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* 3. Ortak yardımcılar ------------------------------------- */
+@utility container-site {
+  max-width: var(--container-site);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility eyebrow {
+  font: 500 12px/1.4 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@utility h-display {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+}
+
+@utility h-section {
+  margin: 0;
+  font: 600 clamp(2.5rem, 5.4vw, 4.75rem) / 0.98 var(--font-display);
+  letter-spacing: -0.035em;
+}
+
+@utility mono-label {
+  font: 500 12px var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Üzerine gelince soldan sağa çizilen alt çizgi */
+@utility link-line {
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 85% / 0 1.5px;
+  transition: background-size 0.35s ease;
+  &:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* İçi boş büyük yazılar: text-outline + text-outline-color-* */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--outline-color, currentColor);
+}
+@utility text-outline-color-* {
+  --outline-color: --value(--color-*);
+}
+
+/* Fotoğraf üstü okunabilirlik gölgesi: alttan koyu, üstte hafif (Kahveler sahnesi) */
+@utility shade-stage {
+  background:
+    linear-gradient(0deg, rgb(20 13 10 / 0.85) 0%, rgb(20 13 10 / 0.2) 42%, rgb(20 13 10 / 0) 62%),
+    linear-gradient(180deg, rgb(20 13 10 / 0.45) 0%, rgb(20 13 10 / 0) 22%);
+}
+
+/* Kare dizisi gölgesi: mobilde alttan yukarı, geniş ekranda soldan sağa (metin solda) */
+@utility shade-seq {
+  background:
+    linear-gradient(
+      0deg,
+      rgb(20 13 10 / 0.94) 0%,
+      rgb(20 13 10 / 0.7) 40%,
+      rgb(20 13 10 / 0.08) 68%
+    ),
+    linear-gradient(180deg, rgb(20 13 10 / 0.55) 0%, rgb(20 13 10 / 0) 18%);
+  @media (width >= 761px) {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(20 13 10 / 0.86) 0%,
+        rgb(20 13 10 / 0.55) 36%,
+        rgb(20 13 10 / 0) 64%
+      ),
+      linear-gradient(0deg, rgb(20 13 10 / 0.75) 0%, rgb(20 13 10 / 0) 42%);
+  }
+}
+
+/* İletişim görseli: üstte rozet, altta başlık okunabilsin */
+@utility shade-contact {
+  background: linear-gradient(
+    180deg,
+    rgb(20 13 10 / 0.55) 0%,
+    rgb(20 13 10 / 0.12) 32%,
+    rgb(20 13 10 / 0.35) 55%,
+    rgb(20 13 10 / 0.92) 100%
+  );
+}
+
+/* 4. Hareket ----------------------------------------------- */
+/* Gecikmeli giriş: style={{ '--d': '.55s' }} */
+@utility fade-in {
+  animation: var(--animate-fade-up);
+  animation-delay: var(--d, 0s);
+}
+
+/* Kaydırınca belirme (desteklemeyen tarayıcıda içerik normal görünür) */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    animation: var(--animate-rise);
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
