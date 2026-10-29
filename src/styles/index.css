@@ -1,6 +1,6 @@
 /* =========================================================
    Yâren — stil girişi (Tailwind CSS v4, CSS-first)
-   Bölümler: 1 Tokenlar · 2 Temel · 3 Ortak yardımcılar · 4 Hareket
+   Bölümler: 1 Tokenlar · 2 Temel · 3 Ortak yardımcılar · 4 Skeleton · 5 Hareket
    Kaynak: yaren-site/css/style.css
    ========================================================= */
 @import 'tailwindcss';
@@ -35,6 +35,16 @@
   --font-display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'DM Mono', ui-monospace, Menlo, monospace;
+
+  /* Yazı boyutları — satır yüksekliği taşımaz, orijinal CSS gibi üst öğeden devralınır
+     (gövde 1.6). Orijinaldeki `font:` kısaltmasının verdiği `normal` için leading-[normal]. */
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
 
   /* Kırılımlar — tasarımdaki max-width sınırlarının min-width karşılıkları */
   --breakpoint-*: initial;
@@ -139,6 +149,9 @@
     }
   }
 }
+
+/* Kısa ekranlar (yatay telefon, alçak pencere): kare dizisi metni sahneye sığsın */
+@custom-variant short (@media (max-height: 520px));
 
 /* 2. Temel ------------------------------------------------ */
 @layer base {
@@ -256,7 +269,63 @@
   );
 }
 
-/* 4. Hareket ----------------------------------------------- */
+/* 4. Skeleton ---------------------------------------------- */
+/* Bölüm hazır değilken (data-loading) içindeki data-sk öğeleri yerinde iskelete dönüşür.
+   Katmansız yazıldı: yardımcı sınıfları ezer, ama en alttaki "hareketi azalt" kuralı bunları ezer. */
+[data-loading] {
+  --sk: rgb(43 29 22 / 0.09);
+}
+[data-loading='dark'] {
+  --sk: rgb(244 239 230 / 0.11);
+}
+/* Giriş animasyonları içerik hazır olunca baştan başlar */
+[data-loading] .animate-word-up,
+[data-loading] .fade-in {
+  animation: none !important;
+}
+[data-loading] [data-sk] {
+  animation: skeleton-pulse 1.6s ease-in-out infinite !important;
+}
+[data-loading] [data-sk='text'],
+[data-loading] [data-sk='text'] * {
+  color: transparent !important;
+  -webkit-text-stroke-color: transparent !important;
+}
+/* Her satır kendi çizgisi: satır yüksekliğinin ortasındaki %64'lük şerit */
+[data-loading] [data-sk='text'] {
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 0.18lh,
+    var(--sk) 0.18lh 0.82lh,
+    transparent 0.82lh 1lh
+  ) !important;
+}
+[data-loading] [data-sk='block'] {
+  color: transparent !important;
+  background: var(--sk) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+[data-loading] [data-sk='block'] * {
+  visibility: hidden;
+}
+[data-loading] [data-sk='media'] {
+  background: var(--sk) !important;
+}
+[data-loading] [data-sk='media'] > :is(canvas, img),
+[data-loading] [data-sk='hide'] {
+  visibility: hidden;
+}
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* 5. Hareket ----------------------------------------------- */
 /* Gecikmeli giriş: style={{ '--d': '.55s' }} */
 @utility fade-in {
   animation: var(--animate-fade-up);

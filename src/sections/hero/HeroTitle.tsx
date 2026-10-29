@@ -11,7 +11,7 @@ export function HeroTitle({ id }: { id: string }) {
   return (
     <h1
       id={id}
-      className="h-display text-[50px] leading-[.95] tracking-[-.045em] lg:text-[clamp(3rem,7vw,6.75rem)]"
+      className="h-display text-[50px] leading-[.95] tracking-[-.045em] lg:text-[clamp(3rem,7vw,6.75rem)] short:text-[clamp(2.25rem,5vw,3.25rem)]"
     >
       {WORDS.map((word, i) => (
         <span key={word.text}>

@@ -28,8 +28,8 @@ export function CoffeeRow({ item, index, open, option, onSelect, onOptionChange 
       >
         <span
           className={cn(
-            'font-mono text-[13px] font-medium',
-            open ? 'text-zeytin' : 'text-gri-kahve',
+            'font-mono text-[13px] leading-[normal] font-medium',
+            open ? 'text-zeytin' : 'text-dem', // gri-kahve 3.6:1 kalıyordu; dem 5.9:1
           )}
         >
           {item.no}
@@ -46,7 +46,7 @@ export function CoffeeRow({ item, index, open, option, onSelect, onOptionChange 
           <span className="block text-[13px] text-dem sm:text-sm">{item.short}</span>
         </span>
         <span className="flex items-center gap-4">
-          <span className="font-mono text-[17px] font-medium sm:text-xl">
+          <span className="font-mono text-[17px] leading-[normal] font-medium sm:text-xl">
             ₺{item.options[option].price}
           </span>
           <span

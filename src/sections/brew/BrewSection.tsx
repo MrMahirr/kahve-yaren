@@ -26,9 +26,9 @@ export function BrewSection() {
       ref={sectionRef}
       id={SECTION_IDS.brew}
       aria-labelledby="demleme-baslik"
-      className="relative h-[calc(min(100vh,844px)+1000px)] bg-gece text-kaymak lg:h-[calc(min(100vh,1000px)+1400px)]"
+      className="relative h-[calc(100svh+1000px)] bg-gece text-kaymak lg:h-[calc(100svh+1400px)]"
     >
-      <div className="sticky top-0 h-[min(100vh,844px)] overflow-hidden lg:h-[min(100vh,1000px)]">
+      <div className="sticky top-0 h-screen overflow-hidden supports-[height:100dvh]:h-dvh">
         <FrameSequence
           sectionRef={sectionRef}
           prefix="es"
@@ -39,18 +39,18 @@ export function BrewSection() {
         />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 shade-seq" />
 
-        <Container className="relative flex h-full flex-col justify-end gap-5 pt-[calc(var(--spacing-nav)+32px)] pb-8 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-8 lg:pb-[clamp(40px,6vw,72px)]">
-          <div className="flex flex-none flex-col gap-[18px] lg:max-w-[560px] lg:flex-[1_1_480px] lg:gap-[22px]">
+        <Container className="relative flex h-full flex-col justify-end gap-5 pt-[calc(var(--spacing-nav)+32px)] pb-8 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-8 lg:pb-[clamp(40px,6vw,72px)] short:gap-4 short:pt-[calc(var(--spacing-nav)+16px)] short:pb-5">
+          <div className="flex flex-none flex-col gap-[18px] lg:max-w-[560px] lg:flex-[1_1_480px] lg:gap-[22px] short:gap-3">
             <Eyebrow tone="light">Cezveden portafiltreye</Eyebrow>
             <h2
               id="demleme-baslik"
-              className="h-display text-[44px] lg:text-[clamp(2.5rem,5.6vw,5rem)]"
+              className="h-display text-[44px] lg:text-[clamp(2.5rem,5.6vw,5rem)] short:text-[clamp(2rem,4.5vw,3rem)]"
             >
               Aynı sabır,
               <br />
               <span className="text-zeytin-isik">dokuz bar</span> basınçla.
             </h2>
-            <p className="m-0 max-w-[30rem] text-base leading-[1.65] text-krema lg:text-lg">
+            <p className="m-0 max-w-[30rem] text-base leading-[1.65] text-krema lg:text-lg short:text-[15px]">
               Taze öğütülmüş çekirdek, yirmi beş saniyelik bir demleme ve kalın, fındıksı bir krema.
               Geleneği bugünün hızıyla buluşturuyoruz.
             </p>
@@ -58,7 +58,7 @@ export function BrewSection() {
               {ESPRESSO_PHASES.map((step, i) => (
                 <div
                   key={step.name}
-                  className="flex flex-1 flex-col gap-2.5 font-mono text-xs tracking-[.1em] uppercase"
+                  className="flex flex-1 flex-col gap-2.5 font-mono text-xs leading-[normal] tracking-[.1em] uppercase"
                 >
                   <span
                     className={cn(

@@ -24,7 +24,7 @@ export function OptionGroup({ id, label, options, value, onChange }: OptionGroup
             type="button"
             aria-pressed={index === value}
             onClick={() => onChange(index)}
-            className="inline-flex h-11 cursor-pointer items-center gap-2.5 rounded-full border border-gri-kahve bg-transparent px-[18px] font-body text-sm font-semibold text-telve transition-colors duration-250 hover:border-telve aria-pressed:border-telve aria-pressed:bg-telve aria-pressed:text-kaymak"
+            className="inline-flex h-11 cursor-pointer items-center gap-2.5 rounded-full border border-gri-kahve bg-transparent px-[18px] font-body text-sm leading-[normal] font-semibold text-telve transition-colors duration-250 hover:border-telve aria-pressed:border-telve aria-pressed:bg-telve aria-pressed:text-kaymak"
           >
             {option.label}
             <small className="font-mono text-xs font-medium opacity-75">₺{option.price}</small>

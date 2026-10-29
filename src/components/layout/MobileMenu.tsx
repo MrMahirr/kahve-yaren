@@ -30,7 +30,9 @@ export function MobileMenu({ id, open, onNavigate }: MobileMenuProps) {
               className="flex min-h-[60px] items-center justify-between border-b border-kaymak/12 font-display text-[28px] leading-[1.1] font-semibold tracking-[-.02em] text-kaymak no-underline"
             >
               {link.label}
-              <small className="font-mono text-xs font-medium text-zeytin-isik">{link.no}</small>
+              <small className="font-mono text-xs leading-[normal] font-medium text-zeytin-isik">
+                {link.no}
+              </small>
             </a>
           ))}
           <ButtonLink href={`#${SECTION_IDS.coffee}`} onClick={onNavigate} className="mt-5">

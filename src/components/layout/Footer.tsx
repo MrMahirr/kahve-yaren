@@ -28,7 +28,7 @@ export function Footer() {
       </div>
 
       <Container>
-        <div className="flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-kaymak/16 pt-5 pb-7 font-mono text-xs tracking-[.06em] text-krema">
+        <div className="flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-kaymak/16 pt-5 pb-7 font-mono text-xs leading-[normal] tracking-[.06em] text-krema">
           <span>© 2026 Yâren</span>
           <span>Hayali bir markadır · Aday çalışması</span>
         </div>

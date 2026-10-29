@@ -13,7 +13,8 @@ export function StoryStep({ step, active, last }: StoryStepProps) {
     <article
       className={cn(
         'flex min-h-[340px] flex-col justify-center gap-3 transition-opacity duration-500 lg:min-h-[480px] lg:gap-4',
-        active ? 'opacity-100' : 'opacity-30',
+        // %60: etkin olmayan adım soluk ama WCAG AA kontrastını korur (orijinalde %30, ≈2.2:1).
+        active ? 'opacity-100' : 'opacity-60',
       )}
     >
       <span

@@ -10,6 +10,8 @@ const twMerge = extendTailwindMerge<'text-outline' | 'text-outline-color'>({
       'text-outline-color': [{ 'text-outline-color': [(value: string) => value.length > 0] }],
     },
   },
+  // Yazı boyutu sınıflarımız satır yüksekliği taşımadığı için boyut, leading-*'i silmemeli.
+  override: { conflictingClassGroups: { 'font-size': [] } },
 })
 
 /** Koşullu sınıfları birleştirir; çakışan Tailwind sınıflarında sonuncusu kazanır. */

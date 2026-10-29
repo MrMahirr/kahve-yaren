@@ -122,7 +122,7 @@ export function ContactForm({ topic, onClearTopic, onSubmit, focusOnMount }: Con
         label="Mesajınız"
         error={errors.message?.message}
         aside={
-          <span aria-hidden="true" className="font-mono text-xs text-dem">
+          <span aria-hidden="true" className="font-mono text-xs leading-[normal] text-dem">
             {messageLength} / {MESSAGE_MAX}
           </span>
         }

@@ -34,7 +34,7 @@ describe('StorySection', () => {
     const steps = screen.getAllByRole('article')
     expect(steps).toHaveLength(4)
     expect(steps[0]).toHaveClass('opacity-100')
-    expect(steps[1]).toHaveClass('opacity-30')
+    expect(steps[1]).toHaveClass('opacity-60')
     expect(screen.getByText('Telve · Çekirdek')).toBeInTheDocument()
   })
 })

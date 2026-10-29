@@ -44,11 +44,11 @@ export function StorySection() {
         ref={trackRef}
         className="container-site flex flex-row-reverse flex-wrap gap-x-[clamp(32px,5vw,72px)] pb-[clamp(72px,9vw,128px)]"
       >
-        <div className="sticky top-[calc(var(--spacing-nav)+12px)] z-2 h-[340px] basis-full self-start overflow-hidden rounded-[2px] border border-krema/16 bg-telve lg:h-[min(clamp(340px,52vw,740px),calc(100vh-100px))] lg:flex-[1.15_1_480px]">
+        <div className="sticky top-[calc(var(--spacing-nav)+12px)] z-2 h-[min(340px,calc(100svh-var(--spacing-nav)-24px))] basis-full self-start overflow-hidden rounded-[2px] border border-krema/16 bg-telve lg:h-[min(clamp(340px,52vw,740px),calc(100svh-100px))] lg:flex-[1.15_1_480px]">
           <canvas ref={canvasRef} aria-hidden="true" className="block size-full touch-pan-y" />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-5 top-[18px] flex justify-between gap-3 font-mono text-xs font-medium tracking-[.12em] text-krema uppercase"
+            className="pointer-events-none absolute inset-x-5 top-[18px] flex justify-between gap-3 font-mono text-xs leading-[normal] font-medium tracking-[.12em] text-krema uppercase"
           >
             <span>
               {current.no} / 0{STORY_STEPS.length}

@@ -15,7 +15,7 @@ export function SelectionSummary({ current, onAsk }: SelectionSummaryProps) {
   return (
     <div className="flex flex-col items-stretch justify-between gap-x-5 gap-y-4 rounded-[2px] bg-telve p-5 text-kaymak sm:flex-row sm:flex-wrap sm:items-center sm:pl-6">
       <div>
-        <span className="block font-mono text-[11px] font-medium tracking-[.14em] text-krema uppercase">
+        <span className="block font-mono text-[11px] leading-[normal] font-medium tracking-[.14em] text-krema uppercase">
           Seçimin
         </span>
         <span className="block text-[17px] font-semibold">
