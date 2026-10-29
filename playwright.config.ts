@@ -7,6 +7,9 @@ const PORT = 4173
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
+  // Her test ayrı bir Chrome açar; yerel makinede aşırı paralellik zamanlamaları bozuyor.
+  workers: 4,
+  expect: { timeout: 10_000 },
   reporter: [['list']],
   use: {
     baseURL: `http://localhost:${PORT}`,

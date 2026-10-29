@@ -24,4 +24,7 @@ if (!window.matchMedia) {
 HTMLCanvasElement.prototype.getContext = (() =>
   null) as typeof HTMLCanvasElement.prototype.getContext
 
+// jsdom görselleri indirmez; decode() hemen çözülsün ki bölümler skeleton'dan çıksın.
+HTMLImageElement.prototype.decode = () => Promise.resolve()
+
 afterEach(() => cleanup())

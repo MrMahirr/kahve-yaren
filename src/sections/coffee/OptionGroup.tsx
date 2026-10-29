@@ -14,7 +14,7 @@ export function OptionGroup({ id, label, options, value, onChange }: OptionGroup
 
   return (
     <div className="flex flex-col gap-2.5">
-      <span id={labelId} className="mono-label text-dem">
+      <span id={labelId} data-sk="text" className="mono-label text-dem">
         {label}
       </span>
       <div role="group" aria-labelledby={labelId} className="flex flex-wrap gap-2">
@@ -22,6 +22,7 @@ export function OptionGroup({ id, label, options, value, onChange }: OptionGroup
           <button
             key={option.label}
             type="button"
+            data-sk="block"
             aria-pressed={index === value}
             onClick={() => onChange(index)}
             className="inline-flex h-11 cursor-pointer items-center gap-2.5 rounded-full border border-gri-kahve bg-transparent px-[18px] font-body text-sm leading-[normal] font-semibold text-telve transition-colors duration-250 hover:border-telve aria-pressed:border-telve aria-pressed:bg-telve aria-pressed:text-kaymak"

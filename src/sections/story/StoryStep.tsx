@@ -19,6 +19,7 @@ export function StoryStep({ step, active, last }: StoryStepProps) {
     >
       <span
         aria-hidden="true"
+        data-sk="text"
         className={cn(
           'font-display text-[72px] leading-[.85] font-bold tracking-[-.05em] text-outline lg:text-[clamp(5rem,9vw,8rem)]',
           last ? 'text-outline-color-filiz' : 'text-outline-color-findik',
@@ -26,10 +27,15 @@ export function StoryStep({ step, active, last }: StoryStepProps) {
       >
         {step.no}
       </span>
-      <h3 className="m-0 font-display text-[28px] leading-[1.1] font-semibold tracking-[-.02em] lg:text-[clamp(1.75rem,2.6vw,2.25rem)]">
+      <h3
+        data-sk="text"
+        className="m-0 font-display text-[28px] leading-[1.1] font-semibold tracking-[-.02em] lg:text-[clamp(1.75rem,2.6vw,2.25rem)]"
+      >
         {step.title}
       </h3>
-      <p className="m-0 max-w-[28rem] text-base leading-[1.7] text-krema lg:text-lg">{step.text}</p>
+      <p data-sk="text" className="m-0 max-w-[28rem] text-base leading-[1.7] text-krema lg:text-lg">
+        {step.text}
+      </p>
     </article>
   )
 }

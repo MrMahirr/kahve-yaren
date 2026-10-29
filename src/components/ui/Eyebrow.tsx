@@ -13,5 +13,5 @@ type EyebrowProps = HTMLAttributes<HTMLSpanElement> & { tone?: Tone }
 
 /** Bölüm başlıklarının üstündeki küçük mono etiket ("02 — Kahveler"). */
 export function Eyebrow({ tone = 'olive', className, ...props }: EyebrowProps) {
-  return <span className={cn('eyebrow', tones[tone], className)} {...props} />
+  return <span data-sk="text" className={cn('eyebrow', tones[tone], className)} {...props} />
 }

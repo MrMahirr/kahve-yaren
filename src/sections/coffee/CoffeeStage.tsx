@@ -15,6 +15,7 @@ export function CoffeeStage({ menu, current }: CoffeeStageProps) {
   return (
     <figure
       aria-live="polite"
+      data-sk="media"
       className="relative m-0 min-h-[clamp(420px,46vw,660px)] overflow-hidden rounded-[2px] bg-telve text-kaymak"
     >
       {menu.map((coffee) => (
@@ -31,29 +32,41 @@ export function CoffeeStage({ menu, current }: CoffeeStageProps) {
           )}
         />
       ))}
-      <div aria-hidden="true" className="absolute inset-0 shade-stage" />
+      <div aria-hidden="true" data-sk="hide" className="absolute inset-0 shade-stage" />
 
       <div className="absolute inset-x-5 top-5 flex items-center justify-between gap-3 font-mono text-xs leading-[normal] tracking-[.14em]">
         <Chip>{item.tag}</Chip>
-        <span>
+        <span data-sk="text">
           N° {item.no} / 0{menu.length}
         </span>
       </div>
 
       <figcaption className="absolute inset-x-[clamp(20px,3vw,36px)] bottom-[clamp(20px,3vw,36px)] flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
         <div>
-          <span className="font-mono text-xs leading-[normal] tracking-[.14em] text-krema uppercase">
+          <span
+            data-sk="text"
+            className="font-mono text-xs leading-[normal] tracking-[.14em] text-krema uppercase"
+          >
             {item.method}
           </span>
-          <span className="mt-2 block font-display text-[40px] leading-[.92] font-semibold tracking-[-.04em] sm:text-[clamp(2.5rem,5vw,4.5rem)]">
+          <span
+            data-sk="text"
+            className="mt-2 block font-display text-[40px] leading-[.92] font-semibold tracking-[-.04em] sm:text-[clamp(2.5rem,5vw,4.5rem)]"
+          >
             {item.name}
           </span>
         </div>
         <div className="flex flex-col items-end gap-1">
-          <span className="font-mono text-xs leading-[normal] tracking-[.14em] text-krema uppercase">
+          <span
+            data-sk="text"
+            className="font-mono text-xs leading-[normal] tracking-[.14em] text-krema uppercase"
+          >
             {option.label}
           </span>
-          <strong className="font-mono text-[28px] leading-none font-medium sm:text-[clamp(2rem,3.4vw,3rem)]">
+          <strong
+            data-sk="text"
+            className="font-mono text-[28px] leading-none font-medium sm:text-[clamp(2rem,3.4vw,3rem)]"
+          >
             ₺{option.price}
           </strong>
         </div>

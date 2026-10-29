@@ -1,12 +1,17 @@
 import { AnimatePresence, m } from 'motion/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Container } from '@/components/ui/Container'
 import { SECTION_IDS } from '@/data/navigation'
+import { frameList } from '@/data/sequences'
 import { useContactTopic } from '@/features/coffee/contactTopic'
 import { firstName, type ContactValues } from '@/features/contact/contactSchema'
+import { useAssetsReady } from '@/hooks/useAssetsReady'
+import { skeletonProps } from '@/lib/skeleton'
 import { ContactForm } from './ContactForm'
 import { ContactSuccess, type SentMessage } from './ContactSuccess'
 import { ContactVisual } from './ContactVisual'
+
+const COVER = frameList('tk', 1)
 
 const swap = {
   initial: { opacity: 0, y: 10 },
@@ -19,6 +24,9 @@ export function ContactSection() {
   const { topic, setTopic } = useContactTopic()
   const [sent, setSent] = useState<SentMessage | null>(null)
   const [returning, setReturning] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  // Bölüm ekrana yaklaşınca kapak görseli beklenir; o zamana kadar iskelet.
+  const ready = useAssetsReady({ images: COVER, fonts: true, deferUntilNear: sectionRef })
   const [lastTopic, setLastTopic] = useState(topic)
 
   // Başarı ekranındayken menüden yeni bir konu seçilirse forma dönülür.
@@ -40,6 +48,8 @@ export function ContactSection() {
 
   return (
     <section
+      ref={sectionRef}
+      {...skeletonProps(ready, 'light')}
       id={SECTION_IDS.contact}
       aria-labelledby="iletisim-baslik"
       className="pb-[clamp(72px,9vw,136px)]"

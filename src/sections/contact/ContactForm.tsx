@@ -64,6 +64,7 @@ export function ContactForm({ topic, onClearTopic, onSubmit, focusOnMount }: Con
 
   const controlProps = (field: keyof ContactValues) => ({
     id: FIELD_IDS[field],
+    'data-sk': 'block',
     'aria-invalid': Boolean(errors[field]),
     'aria-describedby': errorId(FIELD_IDS[field]),
     ...register(field),
@@ -77,10 +78,15 @@ export function ContactForm({ topic, onClearTopic, onSubmit, focusOnMount }: Con
       className="flex flex-col gap-7"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <h3 className="m-0 font-display text-[28px] leading-[1.1] font-semibold tracking-[-.02em]">
+        <h3
+          data-sk="text"
+          className="m-0 font-display text-[28px] leading-[1.1] font-semibold tracking-[-.02em]"
+        >
           Mesaj bırak
         </h3>
-        <span className="text-sm text-dem">Tüm alanlar zorunludur.</span>
+        <span data-sk="text" className="text-sm text-dem">
+          Tüm alanlar zorunludur.
+        </span>
       </div>
 
       {topic && <TopicChip topic={topic} onClear={onClearTopic} />}
@@ -122,7 +128,11 @@ export function ContactForm({ topic, onClearTopic, onSubmit, focusOnMount }: Con
         label="Mesajınız"
         error={errors.message?.message}
         aside={
-          <span aria-hidden="true" className="font-mono text-xs leading-[normal] text-dem">
+          <span
+            aria-hidden="true"
+            data-sk="text"
+            className="font-mono text-xs leading-[normal] text-dem"
+          >
             {messageLength} / {MESSAGE_MAX}
           </span>
         }
@@ -141,7 +151,7 @@ export function ContactForm({ topic, onClearTopic, onSubmit, focusOnMount }: Con
           Mesajı Gönder
           <IconArrowRight />
         </Button>
-        <span className="w-full text-center text-sm text-dem sm:w-auto sm:text-left">
+        <span data-sk="text" className="w-full text-center text-sm text-dem sm:w-auto sm:text-left">
           Yanıtı e-posta adresine göndeririz.
         </span>
       </div>

@@ -15,7 +15,7 @@ type FormFieldProps = {
 /** Etiket + girdi + hata metni; hata, girdiye aria-describedby ile bağlıdır. */
 export function FormField({ id, label, error, aside, children }: FormFieldProps) {
   const labelElement = (
-    <label htmlFor={id} className="mono-label text-dem">
+    <label htmlFor={id} data-sk="text" className="mono-label text-dem">
       {label}
     </label>
   )

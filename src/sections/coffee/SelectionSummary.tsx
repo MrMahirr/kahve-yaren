@@ -13,17 +13,25 @@ export function SelectionSummary({ current, onAsk }: SelectionSummaryProps) {
   const { item, option, label } = current
 
   return (
-    <div className="flex flex-col items-stretch justify-between gap-x-5 gap-y-4 rounded-[2px] bg-telve p-5 text-kaymak sm:flex-row sm:flex-wrap sm:items-center sm:pl-6">
+    <div
+      data-sk="media"
+      className="flex flex-col items-stretch justify-between gap-x-5 gap-y-4 rounded-[2px] bg-telve p-5 text-kaymak sm:flex-row sm:flex-wrap sm:items-center sm:pl-6"
+    >
       <div>
-        <span className="block font-mono text-[11px] leading-[normal] font-medium tracking-[.14em] text-krema uppercase">
+        <span
+          data-sk="text"
+          className="block font-mono text-[11px] leading-[normal] font-medium tracking-[.14em] text-krema uppercase"
+        >
           Seçimin
         </span>
-        <span className="block text-[17px] font-semibold">
+        <span data-sk="text" className="block text-[17px] font-semibold">
           {item.name} · {option.label}
         </span>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-3 sm:justify-start">
-        <span className="font-mono text-[26px] leading-none font-medium">₺{option.price}</span>
+        <span data-sk="text" className="font-mono text-[26px] leading-none font-medium">
+          ₺{option.price}
+        </span>
         <ButtonLink
           href={`#${SECTION_IDS.contact}`}
           onClick={() => onAsk(label)}

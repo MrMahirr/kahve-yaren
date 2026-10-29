@@ -38,6 +38,7 @@ export function FrameSequence({
     <canvas
       ref={canvasRef}
       role="img"
+      data-sk="media"
       aria-label={label}
       className="absolute inset-0 block size-full"
     />
