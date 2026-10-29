@@ -291,10 +291,11 @@
   color: transparent !important;
   -webkit-text-stroke-color: transparent !important;
 }
-/* Her satır kendi çizgisi: satır yüksekliğinin ortasındaki %64'lük şerit */
+/* Her satır kendi çizgisi: satır yüksekliğinin ortasındaki %64'lük şerit.
+   fit-content zaten kullanılabilir alanla sınırlı; öğenin kendi max-width'i korunmalı
+   (ezilirse paragraf genişler, satır sayısı değişir ve içerik gelince sayfa kayar). */
 [data-loading] [data-sk='text'] {
   width: fit-content;
-  max-width: 100%;
   border-radius: 4px;
   background: repeating-linear-gradient(
     180deg,
@@ -311,6 +312,12 @@
 }
 [data-loading] [data-sk='block'] * {
   visibility: hidden;
+}
+[data-loading] [data-sk='block']::placeholder {
+  color: transparent;
+}
+[data-loading] textarea[data-sk='block'] {
+  resize: none;
 }
 [data-loading] [data-sk='media'] {
   background: var(--sk) !important;

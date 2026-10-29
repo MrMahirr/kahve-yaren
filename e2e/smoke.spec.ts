@@ -29,6 +29,7 @@ test.describe('Yâren — duman testleri', () => {
   })
 
   test('hiçbir genişlikte yatay taşma yoktur', async ({ page }) => {
+    test.slow() // dokuz genişlik tek testte
     for (const width of [360, 390, 430, 560, 720, 768, 1024, 1280, 1440]) {
       await page.setViewportSize({ width, height: 860 })
       await page.goto('/')
@@ -92,6 +93,8 @@ test.describe('Yâren — duman testleri', () => {
   test('klavyeyle ilk odak logo linkidir ve odak halkası görünür', async ({ page, isMobile }) => {
     test.skip(isMobile, 'klavye gezintisi masaüstünde denenir')
     await page.goto('/')
+    // Menü yüklenirken iskelettir ve inert'tir; odak alabilmesi için hazır olmalı.
+    await expect(page.locator('header')).not.toHaveAttribute('data-loading')
     await page.keyboard.press('Tab')
     const focused = page.locator(':focus')
     await expect(focused).toHaveAccessibleName('Yâren ana sayfa')
@@ -136,6 +139,39 @@ test.describe('Yâren — duman testleri', () => {
   })
 })
 
+test.describe('Skeleton', () => {
+  test('görseller gecikince bölümler iskelet olur, gelince açılır ve düzen kaymaz', async ({
+    page,
+  }) => {
+    await page.route(/\.webp(\?.*)?$/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 4000))
+      await route.continue().catch(() => {})
+    })
+    await page.goto('/')
+    const hero = page.locator('#ust')
+    await expect(hero).toHaveAttribute('data-loading', 'dark')
+    await expect(hero).toHaveAttribute('aria-busy', 'true')
+
+    const heights = () =>
+      page.evaluate(() =>
+        ['#ust', '#demleme', '#hikaye', '#kahveler', '#iletisim'].map(
+          (s) => document.querySelector(s)!.getBoundingClientRect().height,
+        ),
+      )
+    // Fontlar gelmeden ölçülürse yedek fonttan geçiş yükseklikleri değiştirir (iskeletten bağımsız).
+    // Menü yalnızca fontları bekler: hazırsa fontlar yüklenmiştir, görseller hâlâ gecikmededir.
+    await expect(page.locator('header')).not.toHaveAttribute('data-loading')
+    const before = await heights()
+
+    await expect(hero).not.toHaveAttribute('data-loading', { timeout: 10_000 })
+    for (const id of ['demleme', 'kahveler', 'iletisim']) {
+      await scrollTo(page, `#${id}`)
+      await expect(page.locator(`#${id}`)).not.toHaveAttribute('data-loading', { timeout: 10_000 })
+    }
+    expect(await heights()).toEqual(before)
+  })
+})
+
 test.describe('Ekran oranları', () => {
   // 16:10, 16:9, 21:9, 4:3, dikey tablet, uzun ve kısa telefon, yatay telefon
   const VIEWPORTS = [
@@ -156,6 +192,7 @@ test.describe('Ekran oranları', () => {
     isMobile,
   }) => {
     test.skip(isMobile, 'ekran boyutları elle ayarlanıyor; masaüstü projesinde bir kez yeterli')
+    test.slow() // on ekran boyutu tek testte
     for (const [width, height] of VIEWPORTS) {
       await page.setViewportSize({ width, height })
       await page.goto('/')
